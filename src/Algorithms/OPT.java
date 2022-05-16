@@ -3,10 +3,10 @@ package Algorithms;
 public class OPT implements Algorithm {
 
     @Override
-    public void handleSwap(AlgorithmParameters ap) {
+    public int[] handleSwap(AlgorithmParameters ap) {
         int[] array = new int[ap.references.length - ap.currIndex];
         System.arraycopy(ap.references, ap.currIndex, array, 0, array.length);
-        ap.frames.optSwap(array, ap.currReference);
+        return ap.frames.optSwap(array, ap.currReference);
     }
 
     @Override

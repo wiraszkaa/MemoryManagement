@@ -23,17 +23,20 @@ public class Simulation {
         for (int i = 0; i < references.length; i++) {
             int reference = references[i];
             ap.lruHelper.add(reference);
+            int[] changeArray = null;
             if (!frames.contains(reference)) {
                 faults++;
                 if (!frames.add(reference)) {
                     ap.currReference = reference;
                     ap.currIndex = i;
-                    algorithm.handleSwap(ap);
+                    changeArray = algorithm.handleSwap(ap);
+                } else {
+                    changeArray = new int[]{reference};
                 }
             }
             int[] array = new int[frames.framesArray.length];
             System.arraycopy(frames.framesArray, 0, array, 0, array.length);
-            fd.addFrames(array);
+            fd.addFrames(array, changeArray);
         }
 
         long finish = (System.nanoTime() - start);

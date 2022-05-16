@@ -2,5 +2,5 @@ package Algorithms;
 
 public interface Algorithm {
 
-    void handleSwap(AlgorithmParameters ap);
+    int[] handleSwap(AlgorithmParameters ap);
 }

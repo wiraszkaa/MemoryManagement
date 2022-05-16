@@ -3,8 +3,12 @@ package Algorithms;
 public class LRU implements Algorithm {
 
     @Override
-    public void handleSwap(AlgorithmParameters ap) {
-        ap.frames.swap(ap.lruHelper.getLRU(), ap.currReference);
+    public int[] handleSwap(AlgorithmParameters ap) {
+        int currReference = ap.lruHelper.getLRU();
+        int newReference = ap.currReference;
+        ap.frames.swap(currReference, newReference);
+
+        return new int[]{currReference, newReference};
     }
 
     @Override

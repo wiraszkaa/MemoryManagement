@@ -36,13 +36,16 @@ public class Frames {
         framesMap.remove(currReference);
     }
 
-    public void randSwap(int newReference) {
+    public int[] randSwap(int newReference) {
         Random rd = new Random();
         int index = rd.nextInt(size);
-        swap(framesArray[index], newReference);
+        int currReference = framesArray[index];
+        swap(currReference, newReference);
+
+        return new int[]{currReference, newReference};
     }
 
-    public void optSwap(int[] array, int newReference) {
+    public int[] optSwap(int[] array, int newReference) {
         int reference = framesArray[0];
         int duration = -1;
         for(int i: framesArray) {
@@ -59,6 +62,8 @@ public class Frames {
             }
         }
         swap(reference, newReference);
+
+        return new int[]{reference, newReference};
     }
 
     public int[] getFrames() {
