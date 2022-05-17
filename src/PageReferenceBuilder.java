@@ -6,6 +6,7 @@ public class PageReferenceBuilder {
     private final int frames;
 
     private int maxReference;
+    private int localityDensity;
     private double localityChance;
     private boolean manualMode;
 
@@ -14,6 +15,7 @@ public class PageReferenceBuilder {
         references = new int[amount];
 
         maxReference = 10;
+        localityDensity = 3;
         localityChance = 0.5;
     }
 
@@ -25,8 +27,16 @@ public class PageReferenceBuilder {
         return false;
     }
 
+    public boolean localityDensity(int density) {
+        if (density >= 2) {
+            localityDensity = density;
+            return true;
+        }
+        return false;
+    }
+
     public boolean localityChance(double chance) {
-        if(chance >= 0 && chance <= 1) {
+        if (chance >= 0 && chance <= 1) {
             localityChance = chance;
             return true;
         }
@@ -48,9 +58,9 @@ public class PageReferenceBuilder {
             for (int i = 0; i < references.length; i++) {
                 int reference = random.nextInt(maxReference);
                 if (i >= 2 && random.nextDouble() <= localityChance) {
-                    if (i % 3 == 1) {
+                    if (i % localityChance == localityDensity - 1) {
                         reference = references[0];
-                    } else if (i % 3 == 2) {
+                    } else if (i % localityDensity == localityDensity - 2) {
                         reference = references[1];
                     }
                 }
@@ -68,9 +78,6 @@ public class PageReferenceBuilder {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(String.format("Creating %s references...\n", references.length)).append(Arrays.toString(references)).append("\n");
-
-        return sb.toString();
+        return String.format("Creating %s references...\n%s\n", references.length, Arrays.toString(references));
     }
 }
