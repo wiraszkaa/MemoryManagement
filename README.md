@@ -11,3 +11,5 @@ Available algorithms:
 -OPT (Optimal)
 
 -LRU (Least Recently Used)
+
+-ALRU (Approximate LRU)
