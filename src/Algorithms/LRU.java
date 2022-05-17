@@ -12,6 +12,11 @@ public class LRU implements Algorithm {
     }
 
     @Override
+    public AlgorithmType getType() {
+        return AlgorithmType.LRU;
+    }
+
+    @Override
     public String toString() {
         return "LRU";
     }

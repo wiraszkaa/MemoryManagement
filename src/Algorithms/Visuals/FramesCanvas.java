@@ -10,8 +10,8 @@ public class FramesCanvas extends JComponent {
     int[] changeArray;
 
     public FramesCanvas(int[] frames) {
-        setPreferredSize(new Dimension(80, 500));
         this.frames = frames;
+        setPreferredSize(new Dimension(80, frames.length * 50 + 100));
     }
 
     public void showChange(int[] changeArray) {

@@ -65,8 +65,4 @@ public class Frames {
 
         return new int[]{reference, newReference};
     }
-
-    public int[] getFrames() {
-        return framesArray;
-    }
 }

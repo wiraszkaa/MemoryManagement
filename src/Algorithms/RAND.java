@@ -8,6 +8,11 @@ public class RAND implements Algorithm {
     }
 
     @Override
+    public AlgorithmType getType() {
+        return null;
+    }
+
+    @Override
     public String toString() {
         return "RAND";
     }

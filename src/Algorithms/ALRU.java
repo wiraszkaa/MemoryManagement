@@ -1,27 +1,22 @@
 package Algorithms;
 
-public class FIFO implements Algorithm {
-
+public class ALRU implements Algorithm {
     @Override
     public int[] handleSwap(AlgorithmParameters ap) {
-        while(!ap.frames.contains(ap.references[ap.longestReference])) {
-            ap.longestReference++;
-        }
-        int currReference = ap.references[ap.longestReference];
+        int currReference = ap.ALRUHelper.getLRU();
         int newReference = ap.currReference;
         ap.frames.swap(currReference, newReference);
-        ap.longestReference++;
 
         return new int[]{currReference, newReference};
     }
 
     @Override
     public AlgorithmType getType() {
-        return null;
+        return AlgorithmType.ALRU;
     }
 
     @Override
     public String toString() {
-        return "FIFO";
+        return "ALRU";
     }
 }

@@ -6,6 +6,7 @@ public class PageReferenceBuilder {
     private final int frames;
 
     private int maxReference;
+    private double localityChance;
     private boolean manualMode;
 
     public PageReferenceBuilder(int amount, int frames) {
@@ -13,18 +14,27 @@ public class PageReferenceBuilder {
         references = new int[amount];
 
         maxReference = 10;
+        localityChance = 0.5;
     }
 
     public boolean maxReference(int max) {
-        if(max >= 0) {
+        if (max >= 0) {
             maxReference = max;
             return true;
         }
         return false;
     }
 
+    public boolean localityChance(double chance) {
+        if(chance >= 0 && chance <= 1) {
+            localityChance = chance;
+            return true;
+        }
+        return false;
+    }
+
     public boolean manualMode(int[] references) {
-        if(references.length == this.references.length) {
+        if (references.length > 0) {
             this.references = references;
             manualMode = true;
             return true;
@@ -33,10 +43,18 @@ public class PageReferenceBuilder {
     }
 
     public int[] create() {
-        if(!manualMode) {
+        if (!manualMode) {
             Random random = new Random();
-            for(int i = 0; i < references.length; i++) {
-                references[i] = random.nextInt(maxReference);
+            for (int i = 0; i < references.length; i++) {
+                int reference = random.nextInt(maxReference);
+                if (i >= 2 && random.nextDouble() <= localityChance) {
+                    if (i % 3 == 1) {
+                        reference = references[0];
+                    } else if (i % 3 == 2) {
+                        reference = references[1];
+                    }
+                }
+                references[i] = reference;
             }
         }
 
